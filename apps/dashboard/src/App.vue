@@ -2,7 +2,7 @@
 	<div id="app-dashboard">
 		<h2>{{ greeting.icon }} {{ greeting.text }}</h2>
 
-		<Draggable class="panels" v-model="layout">
+		<Draggable class="panels" v-model="layout" @end="saveLayout">
 			<div v-for="panelId in layout" :key="panels[panelId].id" class="panel">
 				<div class="panel--header">
 					<h3 :class="panels[panelId].iconClass">
