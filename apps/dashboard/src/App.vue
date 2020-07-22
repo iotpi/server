@@ -2,23 +2,18 @@
 	<div id="app-dashboard">
 		<h2>{{ greeting.icon }} {{ greeting.text }}</h2>
 
-		<Container class="panels"
-			orientation="horizontal"
-			drag-handle-selector=".panel--header"
-			@drop="onDrop">
-			<Draggable v-for="panelId in layout" :key="panels[panelId].id" class="panel">
+		<Draggable class="panels" v-model="layout">
+			<div v-for="panelId in layout" :key="panels[panelId].id" class="panel">
 				<div class="panel--header">
-					<a :href="panels[panelId].url">
-						<h3 :class="panels[panelId].iconClass">
-							{{ panels[panelId].title }}
-						</h3>
-					</a>
+					<h3 :class="panels[panelId].iconClass">
+						{{ panels[panelId].title }}
+					</h3>
 				</div>
 				<div class="panel--content">
 					<div :ref="panels[panelId].id" :data-id="panels[panelId].id" />
 				</div>
-			</Draggable>
-		</Container>
+			</div>
+		</Draggable>
 		<a class="edit-panels icon-add" @click="showModal">{{ t('dashboard', 'Edit panels') }}</a>
 		<Modal v-if="modal" @close="closeModal">
 			<div class="modal__content">
@@ -30,7 +25,7 @@
 							class="checkbox"
 							:checked="isActive(panel)"
 							@input="updateCheckbox(panel, $event.target.checked)">
-						<label :for="'panel-checkbox-' + panel.id">
+						<label :for="'panel-checkbox-' + panel.id" :class="panel.iconClass">
 							{{ panel.title }}
 						</label>
 					</li>
@@ -48,7 +43,7 @@ import Vue from 'vue'
 import { loadState } from '@nextcloud/initial-state'
 import { getCurrentUser } from '@nextcloud/auth'
 import { Modal } from '@nextcloud/vue'
-import { Container, Draggable } from 'vue-smooth-dnd'
+import Draggable from 'vuedraggable'
 import axios from '@nextcloud/axios'
 import { generateUrl } from '@nextcloud/router'
 
@@ -76,7 +71,6 @@ export default {
 	name: 'App',
 	components: {
 		Modal,
-		Container,
 		Draggable,
 	},
 	data() {
@@ -216,6 +210,10 @@ export default {
 		border-radius: var(--border-radius-large);
 		border: 2px solid var(--color-border);
 
+		&.sortable-ghost {
+			 opacity: 0.1;
+		}
+
 		& > .panel--header {
 			position: sticky;
 			display: flex;
@@ -228,6 +226,15 @@ export default {
 			border-top-right-radius: calc(var(--border-radius-large) - 2px);
 			backdrop-filter: blur(4px);
 			cursor: grab;
+
+			&, ::v-deep * {
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
 
 			&:active {
 				cursor: grabbing;
@@ -282,6 +289,9 @@ export default {
 			padding: 10px;
 			display: block;
 			list-style-type: none;
+			background-size: 16px;
+			background-position: left center;
+			padding-left: 26px;
 		}
 	}
 
