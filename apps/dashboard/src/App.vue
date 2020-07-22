@@ -30,7 +30,7 @@
 						</label>
 					</li>
 					<li key="appstore">
-						<a href="generateUrl('/apps/settings')" class="button">{{ t('dashboard', 'Get more panels from the app store') }}</a>
+						<a :href="appStoreUrl" class="button">{{ t('dashboard', 'Get more panels from the app store') }}</a>
 					</li>
 				</transition-group>
 			</div>
@@ -49,24 +49,6 @@ import { generateUrl } from '@nextcloud/router'
 
 const panels = loadState('dashboard', 'panels')
 
-const applyDrag = (arr, dragResult) => {
-	const { removedIndex, addedIndex, payload } = dragResult
-	if (removedIndex === null && addedIndex === null) return arr
-
-	const result = [...arr]
-	let itemToAdd = payload
-
-	if (removedIndex !== null) {
-		itemToAdd = result.splice(removedIndex, 1)[0]
-	}
-
-	if (addedIndex !== null) {
-		result.splice(addedIndex, 0, itemToAdd)
-	}
-
-	return result
-}
-
 export default {
 	name: 'App',
 	components: {
@@ -81,6 +63,7 @@ export default {
 			name: getCurrentUser()?.displayName,
 			layout: loadState('dashboard', 'layout').filter((panelId) => panels[panelId]),
 			modal: false,
+			appStoreUrl: generateUrl('/settings/apps'),
 		}
 	},
 	computed: {
@@ -155,10 +138,6 @@ export default {
 				layout: this.layout.join(','),
 			})
 		},
-		onDrop(dropResult) {
-			this.layout = applyDrag(this.layout, dropResult)
-			this.saveLayout()
-		},
 		showModal() {
 			this.modal = true
 		},
@@ -194,7 +173,9 @@ export default {
 	}
 
 	.panels {
-		width: 100%;
+		width: auto;
+		margin: auto;
+		max-width: 1500px;
 		display: flex;
 		justify-content: center;
 		flex-direction: row;
@@ -259,6 +240,9 @@ export default {
 
 		& > .panel--content {
 			margin: 0 16px 16px 16px;
+			max-height: 500px;
+			height: 400px;
+			overflow: auto;
 		}
 	}
 
