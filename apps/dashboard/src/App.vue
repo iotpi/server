@@ -240,8 +240,7 @@ export default {
 
 		& > .panel--content {
 			margin: 0 16px 16px 16px;
-			max-height: 500px;
-			height: 400px;
+			height: 420px;
 			overflow: auto;
 		}
 	}
