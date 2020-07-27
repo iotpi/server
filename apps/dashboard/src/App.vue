@@ -2,7 +2,7 @@
 	<div id="app-dashboard">
 		<h2>{{ greeting.icon }} {{ greeting.text }}</h2>
 
-		<Draggable class="panels" v-model="layout" @end="saveLayout">
+		<Draggable v-model="layout" class="panels" @end="saveLayout">
 			<div v-for="panelId in layout" :key="panels[panelId].id" class="panel">
 				<div class="panel--header">
 					<h3 :class="panels[panelId].iconClass">
@@ -18,6 +18,18 @@
 		<Modal v-if="modal" @close="closeModal">
 			<div class="modal__content">
 				<h3>{{ t('dashboard', 'Edit widgets') }}</h3>
+				<Draggable v-model="layout" class="panels" @end="saveLayout">
+					<li v-for="panel in layout" :key="panel.id">
+						<input :id="'panel-checkbox-' + panel.id"
+							type="checkbox"
+							class="checkbox"
+							:checked="isActive(panel)"
+							@input="updateCheckbox(panel, $event.target.checked)">
+						<label :for="'panel-checkbox-' + panel.id" :class="panel.iconClass">
+							{{ panel.title }}
+						</label>
+					</li>
+				</Draggable>
 				<transition-group name="flip-list" tag="ol">
 					<li v-for="panel in sortedPanels" :key="panel.id">
 						<input :id="'panel-checkbox-' + panel.id"
