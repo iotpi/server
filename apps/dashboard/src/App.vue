@@ -30,21 +30,8 @@
 						</label>
 					</li>
 				</Draggable>
-				<transition-group name="flip-list" tag="ol">
-					<li v-for="panel in sortedPanels" :key="panel.id">
-						<input :id="'panel-checkbox-' + panel.id"
-							type="checkbox"
-							class="checkbox"
-							:checked="isActive(panel)"
-							@input="updateCheckbox(panel, $event.target.checked)">
-						<label :for="'panel-checkbox-' + panel.id" :class="panel.iconClass">
-							{{ panel.title }}
-						</label>
-					</li>
-					<li key="appstore">
-						<a :href="appStoreUrl" class="button">{{ t('dashboard', 'Get more panels from the app store') }}</a>
-					</li>
-				</transition-group>
+
+				<a :href="appStoreUrl" class="button">{{ t('dashboard', 'Get more panels from the app store') }}</a>
 			</div>
 		</Modal>
 	</div>
