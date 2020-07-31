@@ -128,7 +128,7 @@ export default {
 			for (const app in this.callbacks) {
 				const element = this.$refs[app]
 				if (this.layout.indexOf(app) === -1) {
-					return
+					continue
 				}
 				if (this.panels[app] && this.panels[app].mounted) {
 					continue
