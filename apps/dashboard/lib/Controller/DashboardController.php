@@ -89,6 +89,8 @@ class DashboardController extends Controller {
 		}, $this->dashboardManager->getPanels());
 		$this->inititalStateService->provideInitialState('dashboard', 'panels', $panels);
 		$this->inititalStateService->provideInitialState('dashboard', 'layout', $userLayout);
+		$this->inititalStateService->provideInitialState('dashboard', 'firstRun', $this->config->getUserValue($this->userId, 'dashboard', 'firstRun', true));
+		$this->config->setUserValue($this->userId, 'dashboard', 'firstRun', false);
 
 		if (class_exists(LoadViewer::class)) {
 			$this->eventDispatcher->dispatchTyped(new LoadViewer());
