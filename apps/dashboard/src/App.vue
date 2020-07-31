@@ -18,8 +18,11 @@
 		<Modal v-if="modal" @close="closeModal">
 			<div class="modal__content">
 				<h3>{{ t('dashboard', 'Edit widgets') }}</h3>
-				<Draggable v-model="layout" class="panels" @end="saveLayout">
-					<li v-for="panel in layout" :key="panel.id">
+				<Draggable v-model="layout"
+					class="panels"
+					tag="ol"
+					@end="saveLayout">
+					<li v-for="panel in sortedPanels" :key="panel.id">
 						<input :id="'panel-checkbox-' + panel.id"
 							type="checkbox"
 							class="checkbox"
@@ -124,6 +127,9 @@ export default {
 		rerenderPanels() {
 			for (const app in this.callbacks) {
 				const element = this.$refs[app]
+				if (this.layout.indexOf(app) === -1) {
+					return
+				}
 				if (this.panels[app] && this.panels[app].mounted) {
 					continue
 				}
@@ -269,6 +275,8 @@ export default {
 		width: 30vw;
 		margin: 20px;
 		ol {
+			display: flex;
+			flex-direction: column;
 			list-style-type: none;
 		}
 		li label {
