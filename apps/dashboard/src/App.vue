@@ -31,7 +31,7 @@
 					</li>
 				</Draggable>
 
-				<a :href="appStoreUrl" class="button">{{ t('dashboard', 'Get more panels from the app store') }}</a>
+				<a :href="appStoreUrl" class="button">{{ t('dashboard', 'Get more widgets from the app store') }}</a>
 			</div>
 		</Modal>
 	</div>
