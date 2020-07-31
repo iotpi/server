@@ -14,10 +14,10 @@
 				</div>
 			</div>
 		</Draggable>
-		<a class="edit-panels icon-add" @click="showModal">{{ t('dashboard', 'Edit panels') }}</a>
+		<a class="edit-panels icon-add" @click="showModal">{{ t('dashboard', 'Edit widgets') }}</a>
 		<Modal v-if="modal" @close="closeModal">
 			<div class="modal__content">
-				<h3>{{ t('dashboard', 'Edit panels') }}</h3>
+				<h3>{{ t('dashboard', 'Edit widgets') }}</h3>
 				<transition-group name="flip-list" tag="ol">
 					<li v-for="panel in sortedPanels" :key="panel.id">
 						<input :id="'panel-checkbox-' + panel.id"
