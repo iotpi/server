@@ -154,6 +154,9 @@ if (\OC::$server->getConfig()->getSystemValue('installed', false)) {
 		\OC::$server->getEventDispatcher(),
 		\OC::$server->getAppManager()
 	));
+	if (is_array(\OC::$server->getConfig()->getSystemValue('objectstore_multibucket'))) {
+		$application->add(\OC::$server->query(\OC\Core\Command\Maintenance\RepairMultibucketPreviews::class));
+	}
 
 	$application->add(new OC\Core\Command\User\Add(\OC::$server->getUserManager(), \OC::$server->getGroupManager()));
 	$application->add(new OC\Core\Command\User\Delete(\OC::$server->getUserManager()));

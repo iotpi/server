@@ -853,6 +853,7 @@ class ComposerStaticInit53792487c5a8370acc0b06b1a864ff4c
         'OC\\Core\\Command\\Maintenance\\Mimetype\\UpdateJS' => __DIR__ . '/../../..' . '/core/Command/Maintenance/Mimetype/UpdateJS.php',
         'OC\\Core\\Command\\Maintenance\\Mode' => __DIR__ . '/../../..' . '/core/Command/Maintenance/Mode.php',
         'OC\\Core\\Command\\Maintenance\\Repair' => __DIR__ . '/../../..' . '/core/Command/Maintenance/Repair.php',
+        'OC\\Core\\Command\\Maintenance\\RepairMultibucketPreviews' => __DIR__ . '/../../..' . '/core/Command/Maintenance/RepairMultibucketPreviews.php',
         'OC\\Core\\Command\\Maintenance\\UpdateHtaccess' => __DIR__ . '/../../..' . '/core/Command/Maintenance/UpdateHtaccess.php',
         'OC\\Core\\Command\\Maintenance\\UpdateTheme' => __DIR__ . '/../../..' . '/core/Command/Maintenance/UpdateTheme.php',
         'OC\\Core\\Command\\Security\\ImportCertificate' => __DIR__ . '/../../..' . '/core/Command/Security/ImportCertificate.php',

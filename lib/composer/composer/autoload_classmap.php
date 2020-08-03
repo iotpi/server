@@ -824,6 +824,7 @@ return array(
     'OC\\Core\\Command\\Maintenance\\Mimetype\\UpdateJS' => $baseDir . '/core/Command/Maintenance/Mimetype/UpdateJS.php',
     'OC\\Core\\Command\\Maintenance\\Mode' => $baseDir . '/core/Command/Maintenance/Mode.php',
     'OC\\Core\\Command\\Maintenance\\Repair' => $baseDir . '/core/Command/Maintenance/Repair.php',
+    'OC\\Core\\Command\\Maintenance\\RepairMultibucketPreviews' => $baseDir . '/core/Command/Maintenance/RepairMultibucketPreviews.php',
     'OC\\Core\\Command\\Maintenance\\UpdateHtaccess' => $baseDir . '/core/Command/Maintenance/UpdateHtaccess.php',
     'OC\\Core\\Command\\Maintenance\\UpdateTheme' => $baseDir . '/core/Command/Maintenance/UpdateTheme.php',
     'OC\\Core\\Command\\Security\\ImportCertificate' => $baseDir . '/core/Command/Security/ImportCertificate.php',
