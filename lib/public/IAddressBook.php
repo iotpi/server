@@ -107,5 +107,17 @@ namespace OCP {
 		 * @since 5.0.0
 		 */
 		public function delete($id);
+
+		/**
+		 * @return bool
+		 * @since 20.0.0
+		 */
+		public function isShared(): bool;
+
+		/**
+		 * @return bool
+		 * @since 20.0.0
+		 */
+		public function isSystemAddressBook(): bool;
 	}
 }
