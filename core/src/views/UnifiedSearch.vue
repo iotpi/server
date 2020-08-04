@@ -41,12 +41,15 @@
 				@keypress.enter.prevent.stop="onInputEnter">
 		</div>
 
-		<EmptyContent v-if="isLoading" icon="icon-loading">
-			{{ t('core', 'Searching …') }}
-		</EmptyContent>
+		<template v-if="!hasResults">
+			<!-- Loading placeholders -->
+			<ul v-if="isLoading">
+				<li v-for="placeholder in [1, 2, 3]" :key="placeholder">
+					<SearchResultPlaceholder />
+				</li>
+			</ul>
 
-		<template v-else-if="!hasResults">
-			<EmptyContent v-if="isValidQuery && isDoneSearching" icon="icon-search">
+			<EmptyContent v-else-if="isValidQuery && isDoneSearching" icon="icon-search">
 				{{ t('core', 'No results for {query}', {query}) }}
 			</EmptyContent>
 
@@ -94,13 +97,13 @@
 </template>
 
 <script>
-import { getTypes, search, defaultLimit } from '../services/UnifiedSearchService'
+import { getTypes, search, defaultLimit, activeApp } from '../services/UnifiedSearchService'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
-
 import debounce from 'debounce'
 
 import HeaderMenu from '../components/HeaderMenu'
 import SearchResult from '../components/UnifiedSearch/SearchResult'
+import SearchResultPlaceholder from '../components/UnifiedSearch/SearchResultPlaceholder'
 
 const minSearchLength = 2
 
@@ -111,6 +114,7 @@ export default {
 		EmptyContent,
 		HeaderMenu,
 		SearchResult,
+		SearchResultPlaceholder,
 	},
 
 	data() {
@@ -126,6 +130,7 @@ export default {
 			query: '',
 			focused: null,
 
+			activeApp,
 			defaultLimit,
 			minSearchLength,
 
@@ -176,7 +181,7 @@ export default {
 		 * @returns {boolean}
 		 */
 		isDoneSearching() {
-			return Object.values(this.reached).indexOf(false) === -1
+			return Object.values(this.reached).every(state => state === false)
 		},
 
 		/**
@@ -184,7 +189,7 @@ export default {
 		 * @returns {boolean}
 		 */
 		isLoading() {
-			return Object.values(this.loading).indexOf(true) !== -1
+			return Object.values(this.loading).some(state => state === true)
 		},
 	},
 

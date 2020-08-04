@@ -28,6 +28,8 @@ export const activeApp = loadState('core', 'active-app')
 
 /**
  * Get the list of available search providers
+ *
+ * @returns {Array}
  */
 export async function getTypes() {
 	try {
@@ -41,7 +43,13 @@ export async function getTypes() {
 	return []
 }
 
-const sortProviders = function(providers) {
+/**
+ * Sort the providers by the current active app
+ *
+ * @param {Array} providers the providers list
+ * @returns {Array}
+ */
+export function sortProviders(providers) {
 	providers.sort((a, b) => {
 		if (a.id.startsWith(activeApp) && b.id.startsWith(activeApp)) {
 			return a.order - b.order

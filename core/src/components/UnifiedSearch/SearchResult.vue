@@ -2,7 +2,7 @@
 	<a :href="resourceUrl || '#'"
 		class="unified-search__result"
 		:class="{
-			'unified-search__result--focused': focused
+			'unified-search__result--focused': focused,
 		}"
 		@click="reEmitEvent"
 		@focus="reEmitEvent">
@@ -13,10 +13,10 @@
 				'unified-search__result-icon--rounded': rounded,
 				'unified-search__result-icon--no-preview': !hasValidThumbnail && !loaded,
 				'unified-search__result-icon--with-thumbnail': hasValidThumbnail && loaded,
-				[icon]: !loaded && !isIconUrl
+				[icon]: !loaded && !isIconUrl,
 			}"
 			:style="{
-				backgroundImage: isIconUrl ? `url(${icon})` : ''
+				backgroundImage: isIconUrl ? `url(${icon})` : '',
 			}"
 			role="img">
 
@@ -220,7 +220,7 @@ $margin: 10px;
 	&-line-two {
 		overflow: hidden;
 		flex: 1 1 100%;
-		margin: 0;
+		margin: 1px 0;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		// Use the same color as the `a`
