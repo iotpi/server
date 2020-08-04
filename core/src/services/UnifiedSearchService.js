@@ -43,6 +43,23 @@ export async function getTypes() {
 	return []
 }
 
+const sortProviders = function(providers) {
+	providers.sort((a, b) => {
+		if (a.id.startsWith(activeApp) && b.id.startsWith(activeApp)) {
+			return a.order - b.order
+		}
+
+		if (a.id.startsWith(activeApp)) {
+			return -1
+		}
+		if (b.id.startsWith(activeApp)) {
+			return 1
+		}
+		return 0
+	})
+	return providers
+}
+
 /**
  * Sort the providers by the current active app
  *
