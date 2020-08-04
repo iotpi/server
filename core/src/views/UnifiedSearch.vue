@@ -44,7 +44,7 @@
 		<template v-if="!hasResults">
 			<!-- Loading placeholders -->
 			<ul v-if="isLoading">
-				<li v-for="placeholder in [1, 2, 3, 4]" :key="placeholder">
+				<li v-for="placeholder in [1, 2, 3]" :key="placeholder">
 					<SearchResultPlaceholder />
 				</li>
 			</ul>
@@ -67,7 +67,7 @@
 
 		<!-- Grouped search results -->
 		<template v-else>
-			<ul v-for="(list, type, typesIndex) in results"
+			<ul v-for="(list, type, typesIndex) in orderedResults"
 				:key="type"
 				class="unified-search__results"
 				:class="`unified-search__results-${type}`"
@@ -158,6 +158,32 @@ export default {
 		 */
 		hasResults() {
 			return Object.keys(this.results).length !== 0
+		},
+
+		/**
+		 * Order results by putting the active app first
+		 * @returns {Object}
+		 */
+		orderedResults() {
+			const ordered = {}
+			Object.keys(this.results)
+				.sort((a, b) => {
+					if (a.startsWith(activeApp) && b.startsWith(activeApp)) {
+						return this.typesMap[a].order - this.typesMap[b].order
+					}
+					if (a.startsWith(activeApp)) {
+						return -1
+					}
+					if (b.startsWith(activeApp)) {
+						return 1
+					}
+					return 0
+				})
+				.forEach(type => {
+					ordered[type] = this.results[type]
+				})
+
+			return ordered
 		},
 
 		/**
