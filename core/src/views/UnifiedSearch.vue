@@ -44,7 +44,7 @@
 		<template v-if="!hasResults">
 			<!-- Loading placeholders -->
 			<ul v-if="isLoading">
-				<li v-for="placeholder in [1, 2, 3]" :key="placeholder">
+				<li v-for="placeholder in [1, 2, 3, 4]" :key="placeholder">
 					<SearchResultPlaceholder />
 				</li>
 			</ul>
