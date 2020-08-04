@@ -176,15 +176,13 @@ class RepairMultibucketPreviews extends Command {
 
 			$newFoldername = dirname($newPath);
 			try {
-				$newFolder = $this->rootFolder->get($newFoldername);
+				$this->rootFolder->get($newFoldername);
 			} catch (NotFoundException $e) {
-				$newFolder = $this->rootFolder->newFolder($newFoldername);
+				$this->rootFolder->newFolder($newFoldername);
 			}
-			/** @var Folder $newFolder */
-			$newFolder->newFile(basename($newPath), $oldNode->getContent());
+			$oldNode->move($newPath);
 
 			$oldParent = $oldNode->getParent();
-			$oldNode->delete();
 		}
 
 		$progressBar->setMessage("Deleting empty parent folders …");
