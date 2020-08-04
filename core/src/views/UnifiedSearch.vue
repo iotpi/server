@@ -36,7 +36,7 @@
 				v-model="query"
 				class="unified-search__input"
 				type="search"
-				:placeholder="t('core', 'Search for {types} …', { types: typesNames.join(', ') })"
+				:placeholder="t('core', 'Search {types} …', { types: typesNames.join(', ').toLowerCase() })"
 				@input="onInputDebounced"
 				@keypress.enter.prevent.stop="onInputEnter">
 		</div>
