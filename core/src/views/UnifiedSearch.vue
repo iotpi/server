@@ -27,7 +27,7 @@
 		@close="onClose">
 		<!-- Header icon -->
 		<template #trigger>
-			<span class="icon-search-white" />
+			<Magnify class="unified-search__trigger" :size="20" fill-color="var(--color-primary-text)" />
 		</template>
 
 		<!-- Search input -->
@@ -99,6 +99,7 @@
 <script>
 import { getTypes, search, defaultLimit, activeApp } from '../services/UnifiedSearchService'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
+import Magnify from 'vue-material-design-icons/Magnify'
 import debounce from 'debounce'
 
 import HeaderMenu from '../components/HeaderMenu'
@@ -113,6 +114,7 @@ export default {
 	components: {
 		EmptyContent,
 		HeaderMenu,
+		Magnify,
 		SearchResult,
 		SearchResultPlaceholder,
 	},
@@ -496,6 +498,11 @@ $margin: 10px;
 $input-padding: 6px;
 
 .unified-search {
+	&__trigger {
+		width: 20px;
+		height: 20px;
+	}
+
 	&__input-wrapper {
 		position: sticky;
 		// above search results
